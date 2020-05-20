@@ -1001,6 +1001,25 @@ func (n *Node) closeStream() (err error) {
 // Propose is a quorum call invoked on all nodes in configuration c,
 // with the same argument in, and returns a combined result.
 func (c *Configuration) Propose(ctx context.Context, in *HSNode, opts ...grpc.CallOption) (resp *QuorumCert, err error) {
+	var ti traceInfo
+	if c.mgr.opts.trace {
+		ti.Trace = trace.New("gorums."+c.tstring()+".Sent", "Propose")
+		defer ti.Finish()
+
+		ti.firstLine.cid = c.id
+		if deadline, ok := ctx.Deadline(); ok {
+			ti.firstLine.deadline = time.Until(deadline)
+		}
+		ti.LazyLog(&ti.firstLine, false)
+		ti.LazyLog(&payload{sent: true, msg: in}, false)
+
+		defer func() {
+			ti.LazyLog(&qcresult{reply: resp, err: err}, false)
+			if err != nil {
+				ti.SetError()
+			}
+		}()
+	}
 
 	// get the ID which will be used to return the correct responses for a request
 	msgID := c.mgr.nextMsgID()
@@ -1039,6 +1058,10 @@ func (c *Configuration) Propose(ctx context.Context, in *HSNode, opts ...grpc.Ca
 			if r.err != nil {
 				errs = append(errs, GRPCError{r.nid, r.err})
 				break
+			}
+
+			if c.mgr.opts.trace {
+				ti.LazyLog(&payload{sent: false, id: r.nid, msg: r.reply}, false)
 			}
 
 			reply := new(PartialCert)

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"runtime/trace"
 	"sort"
 	"sync"
 	"time"
@@ -111,12 +112,19 @@ func (hs *GorumsHotStuff) startClient(connectTimeout time.Duration) error {
 		}
 	}
 
-	mgr, err := proto.NewManager(addrs, proto.WithGrpcDialOptions(
-		grpc.WithBlock(),
-		grpc.WithInsecure(),
-	),
+	var opts = []proto.ManagerOption{
+		proto.WithGrpcDialOptions(
+			grpc.WithBlock(),
+			grpc.WithInsecure(),
+		),
 		proto.WithDialTimeout(connectTimeout),
-	)
+	}
+
+	if trace.IsEnabled() {
+		opts = append(opts, proto.WithTracing())
+	}
+
+	mgr, err := proto.NewManager(addrs, opts...)
 	if err != nil {
 		return fmt.Errorf("Failed to connect to replicas: %w", err)
 	}

@@ -31,7 +31,7 @@ $(INTERNALPROTO): $(INTERNALFILE)
 
 $(INTERNALGORUMS): $(INTERNALFILE)
 	@protoc -I=$(GOPATH)/src:. \
-		--gorums_out=paths=source_relative:. \
+		--gorums_out=paths=source_relative,trace=true:. \
 		$(INTERNALFILE)
 
 $(PUBLICPROTO): $(PUBLICFILE)
