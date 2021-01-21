@@ -1,4 +1,4 @@
-module github.com/relab/hotstuff
+module github.com/sandertungeaspoy/hotstuff
 
 go 1.13
 
