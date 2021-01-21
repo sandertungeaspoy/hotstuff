@@ -6,10 +6,10 @@ import (
 	"math"
 	"time"
 
-	"github.com/relab/hotstuff"
-	"github.com/relab/hotstuff/config"
-	"github.com/relab/hotstuff/consensus"
-	"github.com/relab/hotstuff/internal/logging"
+	"github.com/sandertungeaspoy/hotstuff"
+	"github.com/sandertungeaspoy/hotstuff/config"
+	"github.com/sandertungeaspoy/hotstuff/consensus"
+	"github.com/sandertungeaspoy/hotstuff/internal/logging"
 )
 
 var logger *log.Logger

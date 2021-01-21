@@ -3,8 +3,8 @@ package proto
 import (
 	"math/big"
 
-	"github.com/relab/hotstuff/config"
-	"github.com/relab/hotstuff/data"
+	"github.com/sandertungeaspoy/hotstuff/config"
+	"github.com/sandertungeaspoy/hotstuff/data"
 )
 
 func PartialSigToProto(p *data.PartialSig) *PartialSig {

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/relab/hotstuff/config"
+	"github.com/sandertungeaspoy/hotstuff/config"
 )
 
 // Command is the client data that is processed by HotStuff

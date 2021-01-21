@@ -4,7 +4,7 @@ import (
 	"crypto/ecdsa"
 	"testing"
 
-	"github.com/relab/hotstuff/config"
+	"github.com/sandertungeaspoy/hotstuff/config"
 )
 
 var pk ecdsa.PrivateKey // must not be a pointer

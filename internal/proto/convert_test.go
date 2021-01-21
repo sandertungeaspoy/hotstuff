@@ -9,8 +9,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/relab/hotstuff/config"
-	"github.com/relab/hotstuff/data"
+	"github.com/sandertungeaspoy/hotstuff/config"
+	"github.com/sandertungeaspoy/hotstuff/data"
 )
 
 var pk ecdsa.PrivateKey
