@@ -19,7 +19,7 @@ import (
 	atomic "sync/atomic"
 	time "time"
 
-	ordering "github.com/sandertungeaspoy/gorums/ordering"
+	ordering "github.com/relab/gorums/ordering"
 	trace "golang.org/x/net/trace"
 	grpc "google.golang.org/grpc"
 	backoff "google.golang.org/grpc/backoff"
